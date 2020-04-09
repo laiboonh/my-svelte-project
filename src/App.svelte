@@ -1,9 +1,20 @@
-<script>
+<script lang="ts">
+	import { onMount } from "svelte";
+
 	export let name;
+
+	let person = undefined;
+
+	onMount(async function() {
+        const response = await fetch('api/get-user');
+		const data = await response.json();
+		person = data.name;
+	});
+	
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
+	<h1>Hello {name}! My name is {person}</h1>
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 </main>
 
